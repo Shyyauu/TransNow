@@ -29,7 +29,7 @@ const translateField = (event) => {
   event.preventDefault()
   setVisible(prevState  => !prevState)
   const wordValue = event.target.getAttribute("value")
-  // sconsole.log(wordValue)
+  console.log(wordValue)
   setWordToTranslate(wordValue)
 }
 
