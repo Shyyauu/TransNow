@@ -1,7 +1,9 @@
 .story:hover {
-    color: royalblue;
+    color: #3DD1E7;
     visibility: visible;
     cursor: pointer;
+    font-size: larger;
+    transition: 1s;
 }
 
 .translation {
@@ -21,4 +23,85 @@
 
 .none {
     display: none;
+}
+
+.nextstory-btn {
+  background-color: #3DD1E7;
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+  padding: .75rem 1.65rem;
+  text-align: center;
+  text-decoration: none #000000 solid;
+  text-decoration-thickness: auto;
+  cursor: pointer;
+  transform: rotate(-2deg);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.nextstory-btn:focus {
+  outline: 0;
+}
+
+.nextstory-btn:after {
+  content: '';
+  position: absolute;
+  border: 1px solid #E5E7EB;
+  bottom: 6px;
+  left: 6px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  transform: rotate(2deg);
+  transition: .2s;
+}
+
+.nextstory-btn:hover:after {
+  bottom: 2px;
+  left: 2px;
+}
+
+@media (min-width: 768px) {
+  .nextstory-btn {
+    padding: .75rem 3rem;
+    font-size: 1.25rem;
+  }
+}
+
+.xmark{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border-radius: 6px;
+    filter: drop-shadow(0 0 1rem #3DD1E7);
+}
+
+.xmark:before,.xmark:after{
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 4px;
+    background-color: white;
+    border-radius: 3px;
+    top: 16px;
+    box-shadow: 0 0 2px 0 #ccc;
+}
+
+.xmark:before{
+    transform: rotate(45deg);
+    left: 2px;
+}
+.xmark:after{
+    transform: rotate(-45deg);
+    right: 2px;
+}
+
+.xmark:hover {
+    filter: drop-shadow(0 0 2px #3DD1E7);
+    transition: 1s;
 }

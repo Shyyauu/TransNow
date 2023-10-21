@@ -14,16 +14,16 @@ export default function Story() {
   const [wordToTranslate, setWordToTranslate] = useState('')
   const [visible, setVisible] = useState(false)
 
+  const fetchData = () => {
+    return fetch("https://shortstories-api.onrender.com")
+            .then(res => res.json())
+            .then(data => setStoriesData(data))
+  }
+
   useEffect(function() {
-    fetch("https://shortstories-api.onrender.com")
-        .then(res => res.json())
-        .then(data => setStoriesData(data))
+    fetchData();
 }, [])
 
-
-function nextStory() {
-    console.log(storiesData)
-}
 
 const translateField = (event) => {
   event.preventDefault()
@@ -32,7 +32,7 @@ const translateField = (event) => {
   console.log(wordValue)
   setWordToTranslate(wordValue)
 }
-
+  console.log(storiesData.length)
     const sentence = storiesData.story.split(' ')
     const spanId = useId() // POPRAWIĆ
 
@@ -48,17 +48,21 @@ const translateField = (event) => {
               sentence.map(sentence => {
                 return (
                   <span
-                  className='story' 
-                  key={spanId} 
-                  value={sentence.toString()}
-                  onClick={translateField}>{sentence} </span>
+                    className='story' 
+                    key={spanId} 
+                    value={sentence.toString()}
+                    onClick={translateField}>
+                  {sentence} </span>
                   )
                 })
               }
         </p>
         <p>{storiesData.moral}</p>
-        <button onClick={nextStory}>Next story</button>
+        
+        <button className='nextstory-btn' onClick={fetchData}>Next story</button>
+        
         <div className={visible ? 'translation' : 'none'}>
+          <div className={'xmark'}></div>
           <p>Wybrane słowo: {wordToTranslate}</p> <br></br>
           <p>Znaczenie: [...]</p>
         </div>
