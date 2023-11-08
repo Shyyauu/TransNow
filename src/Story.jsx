@@ -1,6 +1,7 @@
-import { useState, useEffect, useId} from 'react'
+import { useState, useEffect} from 'react'
+import { nanoid } from 'nanoid'
+import TranslationField from './TranslationField'
 import './Story.css'
-
 
 export default function Story() {
 
@@ -13,16 +14,13 @@ export default function Story() {
 
   const [wordToTranslate, setWordToTranslate] = useState('')
   const [visible, setVisible] = useState(false)
+  const splitingChar = ' '
 
   const fetchData = () => {
-    return fetch("https://shortstories-api.onrender.com")
-            .then(res => res.json())
-            .then(data => setStoriesData(data))
-  }
-
-  useEffect(function() {
-    fetchData();
-}, [])
+      return fetch("https://shortstories-api.onrender.com")
+              .then(res => res.json())
+              .then(data => setStoriesData(data))
+    }
 
 
 const translateField = (event) => {
@@ -32,9 +30,7 @@ const translateField = (event) => {
   console.log(wordValue)
   setWordToTranslate(wordValue)
 }
-  console.log(storiesData.length)
-    const sentence = storiesData.story.split(' ')
-    const spanId = useId() // POPRAWIĆ
+    const sentence = storiesData.story.split(splitingChar)
 
   return (
     <>
@@ -49,23 +45,23 @@ const translateField = (event) => {
                 return (
                   <span
                     className='story' 
-                    key={spanId} 
+                    key={nanoid()} 
                     value={sentence.toString()}
                     onClick={translateField}>
-                  {sentence} </span>
+                  {sentence + splitingChar}</span>
                   )
                 })
               }
         </p>
         <p>{storiesData.moral}</p>
         
-        <button className='nextstory-btn' onClick={fetchData}>Next story</button>
+        <button className='nextstory-btn' onClick={fetchData}> {
+          storiesData.title === 'Title' ? 'New story' : 'Next story'
+        }</button>
         
-        <div className={visible ? 'translation' : 'none'}>
-          <div className={'xmark'}></div>
-          <p>Wybrane słowo: {wordToTranslate}</p> <br></br>
-          <p>Znaczenie: [...]</p>
-        </div>
+        <TranslationField wordToTranslate={wordToTranslate} visible={visible} /> 
+        
+
     </>
   )
 }

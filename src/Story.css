@@ -2,27 +2,8 @@
     color: #3DD1E7;
     visibility: visible;
     cursor: pointer;
-    font-size: larger;
-    transition: 1s;
-}
-
-.translation {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0 0 15px 0;
-    padding: 10px;  
-    width: 400px;
-    height: 200px;
-    background-color: #fff;
-    border: 2px solid whitesmoke;
-    border-radius: 10px;
-    color: black;
-}
-
-.none {
-    display: none;
+    font-size: 18px;
+    transition: 0.2s;
 }
 
 .nextstory-btn {
@@ -30,7 +11,7 @@
   border: 0 solid #E5E7EB;
   box-sizing: border-box;
   color: #000000;
-  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: ui-sans-serif,system-ui,system-ui,"Segoe UI","Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.75rem;
@@ -71,37 +52,4 @@
     padding: .75rem 3rem;
     font-size: 1.25rem;
   }
-}
-
-.xmark{
-    width: 40px;
-    height: 40px;
-    position: relative;
-    border-radius: 6px;
-    filter: drop-shadow(0 0 1rem #3DD1E7);
-}
-
-.xmark:before,.xmark:after{
-    content: '';
-    position: absolute;
-    width: 36px;
-    height: 4px;
-    background-color: white;
-    border-radius: 3px;
-    top: 16px;
-    box-shadow: 0 0 2px 0 #ccc;
-}
-
-.xmark:before{
-    transform: rotate(45deg);
-    left: 2px;
-}
-.xmark:after{
-    transform: rotate(-45deg);
-    right: 2px;
-}
-
-.xmark:hover {
-    filter: drop-shadow(0 0 2px #3DD1E7);
-    transition: 1s;
 }
