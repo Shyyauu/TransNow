@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 // import OpenAI from "openai";
 // import axios from 'axios'
 import './TranslationField.css'
+// import * as deepl from 'deepl-node';
 
 export default function TranslationField(props) {
   
@@ -56,33 +57,40 @@ export default function TranslationField(props) {
   // }
  
   
-  // function deeplApi() {
-  //     const requestOptions = {
-  //       headers: { 
-  //         'Authorization': import.meta.env.VITE_AUTH_KEY,
-  //         'Content-Type': 'application/json',
+  function deeplApi() {
+      const requestOptions = {
+        headers: { 
+          'Authorization': `DeepL-Auth-Key [${import.meta.env.VITE_DEEPL_AUTH_KEY}]`,
+          'Content-Type': 'application/json',
 
-  //       },
-  //       body: { 'text': ["hello world"], 'target_lang': "PL" },
-  //       method: "POST"
-  //     };
-  //     return fetch('https://api-free.deepl.com/v2/translate', requestOptions)
-  //         .then(response => response.json())
-  //         .then(data => setTranslatedWord(data))
-  // }
+        },
+        body: { 'text': ["hello world"], 'target_lang': "PL" },
+        method: "POST"
+      };
+      return fetch('https://api-free.deepl.com/v2/translate', requestOptions)
+          .then(response => response.json())
+          .then(data => setTranslatedWord(data))
+  }
 
-  // deeplApi()
+  
 
-    // useEffect(function(){
-    //   handleGenerateResponse()
-    // }, [])
+    useEffect(function(){
+    //   const deepl = require('deepl-node'); // przeglądarka nie czyta
+    //   const translator = new deepl.Translator(import.meta.env.VITE_DEEPL_AUTH_KEY);
+
+    //   (async () => {
+    //       const result = await translator.translateText('Hello, world!', null, 'fr');
+    //       console.log(result.text); // Bonjour, le monde !
+    //   })();
+    deeplApi()
+    }, [])
 
     return (
     <>
       <div className={props.visible ? 'translation' : 'none'}>
         <div className={'xmark'} ></div>
             <p>Wybrane słowo: {props.wordToTranslate}</p> <br></br>
-            <p>Znaczenie: {handleTranslate}</p>
+            <p>Znaczenie: {translatedWord}</p>
         </div>
     </>
   )
