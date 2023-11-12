@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react'
 // import { Configuration, OpenAIApi } from "openai";
 // import OpenAI from "openai";
-// import axios from 'axios'
+import axios from 'axios'
 import './TranslationField.css'
 // import * as deepl from 'deepl-node';
 
 export default function TranslationField(props) {
   
   const [translatedWord, setTranslatedWord] = useState('wait for it')
-  // const API_KEY = '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'
+    console.log(props.wordToTranslate)
 
+  // const API_KEY = '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'
+  // setTranslatedWord(props.TranslationField)
+  
   // const handleGenerateResponse = () => {
   //   fetch('https://api.openai.com/v1/chat/completions', {
   //     method: 'POST',
@@ -55,34 +58,64 @@ export default function TranslationField(props) {
   //       console.error(err)
   //   })
   // }
- 
-  
-  function deeplApi() {
-      const requestOptions = {
-        headers: { 
-          'Authorization': `DeepL-Auth-Key [${import.meta.env.VITE_DEEPL_AUTH_KEY}]`,
-          'Content-Type': 'application/json',
+////////////////////////////////////////////////////
 
-        },
-        body: { 'text': ["hello world"], 'target_lang': "PL" },
-        method: "POST"
-      };
-      return fetch('https://api-free.deepl.com/v2/translate', requestOptions)
-          .then(response => response.json())
-          .then(data => setTranslatedWord(data))
+
+async function RapidApi() {
+
+    const options = {
+      method: 'GET',
+      url: 'https://translated-mymemory---translation-memory.p.rapidapi.com/get',
+      params: {
+        langpair: 'en|pl',
+        q: props.wordToTranslate,
+        mt: '1',
+        onlyprivate: '0',
+        de: 'a@b.c'
+      },
+      headers: {
+        'X-RapidAPI-Key': import.meta.env.VITE_X_RapidAPI_Key,
+        'X-RapidAPI-Host': 'translated-mymemory---translation-memory.p.rapidapi.com'
+      }
+    };
+    
+    try {
+      const response = await axios.request(options);
+      console.log(response.data.responseData.translatedText);
+      setTranslatedWord(response.data.responseData.translatedText)
+    } catch (error) {
+      console.error(error);
   }
+}
+
+
+////////////////////////////////////////////////////
+  // function deeplApi() {
+  //     const requestOptions = {
+  //       headers: { 
+  //         'Authorization': `DeepL-Auth-Key [${import.meta.env.VITE_DEEPL_AUTH_KEY}]`,
+  //         'Content-Type': 'application/json',
+
+  //       },
+  //       body: { 'text': ["hello world"], 'target_lang': "PL" },
+  //       method: "POST"
+  //     };
+  //     return fetch('https://api-free.deepl.com/v2/translate', requestOptions)
+  //         .then(response => response.json())
+  //         .then(data => setTranslatedWord(data))
+  // }
 
   
 
     useEffect(function(){
-    //   const deepl = require('deepl-node'); // przeglądarka nie czyta
-    //   const translator = new deepl.Translator(import.meta.env.VITE_DEEPL_AUTH_KEY);
+    // //   const deepl = require('deepl-node'); // przeglądarka nie czyta
+    // //   const translator = new deepl.Translator(import.meta.env.VITE_DEEPL_AUTH_KEY);
 
-    //   (async () => {
-    //       const result = await translator.translateText('Hello, world!', null, 'fr');
-    //       console.log(result.text); // Bonjour, le monde !
-    //   })();
-    deeplApi()
+    // //   (async () => {
+    // //       const result = await translator.translateText('Hello, world!', null, 'fr');
+    // //       console.log(result.text); // Bonjour, le monde !
+    // //   })();
+    RapidApi()
     }, [])
 
     return (
