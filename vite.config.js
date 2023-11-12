@@ -5,8 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     proxy: {
-     // '/v2/translate': 'https://api-free.deepl.com'
-      '/api': 'http://localhost:8080'
+     '/v2/translate': 'https://api-free.deepl.com'
+      // '/api': 'http://localhost:8080'
     }
   },
   plugins: [react()],
