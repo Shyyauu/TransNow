@@ -88,7 +88,6 @@ async function RapidApi() {
   }
 }
 
-
 ////////////////////////////////////////////////////
   // function deeplApi() {
   //     const requestOptions = {
