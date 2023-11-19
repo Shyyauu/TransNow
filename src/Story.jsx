@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {nanoid} from "nanoid";
 import TranslationField from "./TranslationField";
+import { Link } from "react-router-dom";
 import "./Story.css";
 
 export default function Story() {
@@ -39,6 +40,7 @@ export default function Story() {
 
   return (
     <>
+      <Link to="/">Settings</Link>
       {/* <pre>{JSON.stringify(storiesData, null, 2)}</pre> */}
       {/* <h1>{storiesData.length}</h1> */}
       <h1>{storiesData.title}</h1>
@@ -60,7 +62,7 @@ export default function Story() {
       </p>
       <p>{storiesData.moral}</p>
 
-      <button className="nextstory-btn" onClick={fetchData}>
+      <button className="story-btn nextstory" onClick={fetchData}>
         {" "}
         {storiesData.title === "Title" ? "New story" : "Next story"}
       </button>

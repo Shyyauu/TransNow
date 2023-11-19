@@ -16,7 +16,7 @@ export default function TranslationField(props) {
       method: "GET",
       url: "https://translated-mymemory---translation-memory.p.rapidapi.com/get",
       params: {
-        langpair: "en|pl",
+        langpair: `en|${props.language}`,
         q: props.wordToTranslate,
         mt: "1",
         onlyprivate: "0",
