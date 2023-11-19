@@ -1,51 +1,74 @@
 .translation {
   position: absolute;
-  top: 25%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0 0 15px 0;
-  padding: 10px;  
-  width: 400px;
-  height: 200px;
-  background-color: #fff;
-  border: 2px solid whitesmoke;
+  transform: translate(-50%, -50%); 
+  min-width: 210px;
+  min-height: 200px;
+  background-color: whitesmoke;
   border-radius: 10px;
   color: black;
 }
 
-.none {
-  display: none;
+.translated-sentence {
+  margin: 10px 0;
 }
 
-.xmark{
-  width: 40px;
-  height: 40px;
-  position: relative;
-  border-radius: 6px;
-  filter: drop-shadow(0 0 1rem #3DD1E7);
+.selected-word {
+  margin: 0;
+  color: red;
 }
 
-.xmark:before,.xmark:after{
-  content: '';
+.the-word {
+  color: black;
+  display: block;
+}
+
+.meaning-word {
+  border-top: solid 1px black;
+  padding-top: 10px;
+  margin: 20px;
+  color: green;
+}
+
+.background {
   position: absolute;
-  width: 36px;
-  height: 4px;
-  background-color: white;
-  border-radius: 3px;
-  top: 16px;
-  box-shadow: 0 0 2px 0 #ccc;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.300);
 }
 
-.xmark:before{
-  transform: rotate(45deg);
-  left: 2px;
-}
-.xmark:after{
-  transform: rotate(-45deg);
-  right: 2px;
+.btn-wrapper {
+  position: absolute;
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  bottom: 0;
 }
 
-.xmark:hover {
-  filter: drop-shadow(0 0 2px #3DD1E7);
-  transition: 1s;
+.i-know {
+  width: 50%;
+  position: relative;
+  padding: 5px 5px 5px 10px;
+  background-color: lime;
+  color: green;
+  border-bottom-left-radius: 10px;
+}
+
+.i-dont-know {
+  width: 50%;
+  position: relative;
+  padding: 5px 10px 5px 5px;
+  background-color: tomato;
+  color: crimson;
+  border-bottom-right-radius: 10px;
 }
