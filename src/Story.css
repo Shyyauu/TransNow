@@ -1,3 +1,7 @@
+.story-area {
+  margin: 10px;
+}
+
 .story:hover {
     color: #3DD1E7;
     visibility: visible;

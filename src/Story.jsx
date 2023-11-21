@@ -1,38 +1,40 @@
 import {useState} from "react";
 import {nanoid} from "nanoid";
-import TranslationField from "./TranslationField";
 import { Link } from "react-router-dom";
+
+import TranslationField from "./TranslationField";
 import "./Story.css";
 
-export default function Story() {
+
+export default function Story({language}) {
   const [storiesData, setStoriesData] = useState({
     title: "Title",
     author: "Author",
     story: "Story",
     moral: "Moral",
-  });
+  })
 
   const [wordToTranslate, setWordToTranslate] = useState("");
-  const [visible, setVisible] = useState(false);
-  const splitingChar = " ";
+  const [visible, setVisible] = useState(false)
+  const splitingChar = " "
 
   const handleToogleVisible = () => {
-    setVisible(false);
-  };
+    setVisible(false)
+  }
 
   const fetchData = () => {
     return fetch("https://shortstories-api.onrender.com")
       .then((res) => res.json())
-      .then((data) => setStoriesData(data));
-  };
+      .then((data) => setStoriesData(data))
+  }
 
   const translateField = (event) => {
-    event.preventDefault();
-    setVisible((prevState) => !prevState);
-    const wordValue = event.target.getAttribute("value");
-    console.log(wordValue);
-    setWordToTranslate(wordValue.toLowerCase());
-  };
+    event.preventDefault()
+    setVisible((prevState) => !prevState)
+    const wordValue = event.target.getAttribute("value")
+    console.log(wordValue)
+    setWordToTranslate(wordValue.toLowerCase())
+  }
 
   const regex = /[,.'"!?—]/g
   const sentence = storiesData.story.split(splitingChar)
@@ -46,7 +48,7 @@ export default function Story() {
       <h1>{storiesData.title}</h1>
       <p>{storiesData.author}</p>
       {/* <div>{storiesData.story}</div> */}
-      <p>
+      <p className="story-area">
         {sentence.map((sentence) => {
           return (
             <span
@@ -57,7 +59,7 @@ export default function Story() {
             >
               {sentence + splitingChar}
             </span>
-          );
+          )
         })}
       </p>
       <p>{storiesData.moral}</p>
@@ -71,9 +73,10 @@ export default function Story() {
         <TranslationField
           wordToTranslate={wordToTranslate}
           visible={visible}
+          language={language.toString()}
           handleToogleVisible={handleToogleVisible}
         />
       ) : null}
     </>
-  );
+  )
 }

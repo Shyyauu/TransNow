@@ -1,11 +1,10 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import axios from "axios";
 import "./TranslationField.css";
 
 
 export default function TranslationField(props) {
-  const [translatedWord, setTranslatedWord] = useState("wait for it");
-
+  const [translatedWord, setTranslatedWord] = useState("wait for it")
 
   const saveTransletedWord = () => {
       console.log(translatedWord)
@@ -30,18 +29,18 @@ export default function TranslationField(props) {
     };
 
     try {
-      const response = await axios.request(options);
-      console.log(response.data.responseData.translatedText);
-      setTranslatedWord(response.data.responseData.translatedText);
+      const response = await axios.request(options)
+      console.log(response.data.responseData.translatedText)
+      setTranslatedWord(response.data.responseData.translatedText)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
 
   useEffect(
     function () {
-      RapidApi();
+      RapidApi()
     },
     [props.wordToTranslate]
   );

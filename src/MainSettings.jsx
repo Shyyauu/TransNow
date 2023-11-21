@@ -1,31 +1,34 @@
-import {useState} from "react";
 import {Link} from "react-router-dom"
 import "./MainSettings.css";
 
-export default function MainSettings() {
-
-  const [Language, setLanguage] = useState("pl");
+export default function MainSettings({onLanguage}) {
+  const handleLanguage = (event) => {
+    event.preventDefault();
+    const selectedLanguage = event.target.value;
+    console.log(selectedLanguage)
+    onLanguage(selectedLanguage)
+  }
 
   const options = [
     { value: 'pl', label: 'Polish' },
     { value: 'de', label: 'German' },
-    { value: 'sp', label: 'Spanish' },
+    { value: 'es', label: 'Spanish' },
     { value: 'ru', label: 'Russian' }
   ]
 
-  function handleSelect(event) {
-    setLanguage(event.target.value)
-    console.log(event.target.value)
-  }
-
   return (
     <>
-        <h1>Main Settings</h1>
+        <h2>Main Settings</h2>
           <div className="select-bar-wrapper">
             <h3>Select language you want to learn.</h3>
-            <select className="select-bar" onChange={handleSelect}>
+            <select className="select-bar" onClick={handleLanguage}>
               {options.map(option => (
-                <option key={option.value} value={option.value}>{option.label}</option>
+                <option 
+                  key={option.value} 
+                  value={option.value}
+                >
+                  {option.label}
+                </option>
               ))} 
             </select>
           </div>
