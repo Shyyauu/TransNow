@@ -13,6 +13,7 @@ export default function MainSettings({onLanguage}) {
     { value: 'pl', label: 'Polish' },
     { value: 'de', label: 'German' },
     { value: 'es', label: 'Spanish' },
+    { value: 'fr', label: 'French' },
     { value: 'ru', label: 'Russian' }
   ]
 

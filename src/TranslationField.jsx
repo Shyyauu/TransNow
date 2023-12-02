@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./TranslationField.css";
 
@@ -7,7 +7,10 @@ export default function TranslationField(props) {
   const [translatedWord, setTranslatedWord] = useState("wait for it")
 
   const saveTransletedWord = () => {
-      console.log(translatedWord)
+      console.log({'word': props.wordToTranslate, 'meaning': translatedWord})
+      const savedWordObject = [{'word': props.wordToTranslate, 'meaning': translatedWord}]
+      props.saveWord(savedWordObject)
+      props.handleToogleVisible(props.visible)
     };
 
   async function RapidApi() {
@@ -55,7 +58,7 @@ export default function TranslationField(props) {
               <p className="meaning-word">Meaning: <span className="the-word">"{translatedWord}"</span></p>       
               <div className="btn-wrapper">
                 <div className="i-know" onClick={saveTransletedWord}>Got it</div>
-                <div className="i-dont-know" onClick={props.handleToogleVisible}>learning</div>
+                <div className="i-dont-know" onClick={props.handleToogleVisible}>not yet</div>
               </div>
             </div>
           </div>

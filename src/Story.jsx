@@ -6,7 +6,7 @@ import TranslationField from "./TranslationField";
 import "./Story.css";
 
 
-export default function Story({language}) {
+export default function Story({language, saveWord}) {
   const [storiesData, setStoriesData] = useState({
     title: "Title",
     author: "Author",
@@ -74,6 +74,7 @@ export default function Story({language}) {
           wordToTranslate={wordToTranslate}
           visible={visible}
           language={language.toString()}
+          saveWord={saveWord}
           handleToogleVisible={handleToogleVisible}
         />
       ) : null}

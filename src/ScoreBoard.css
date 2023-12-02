@@ -1,0 +1,30 @@
+.score-board {
+    position: absolute;
+    content: '';
+    top: 30px;
+    right: 40px;
+    margin: 0;
+    min-height: 500px;
+    width: 250px;
+    border: 2px solid #E5E7EB;
+    border-radius: 2px;
+    background-color: #333;
+
+}
+
+.score-board-click {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    background-color: black;
+    border: 1px solid white;
+}
+
+.saved-word {
+    font-size: 16px;
+    margin: 10px;
+    color: wheat;
+}
+
