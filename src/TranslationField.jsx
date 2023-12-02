@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./TranslationField.css";
+import { useAddTranslation } from "./useAddTranslation";
 
 
 export default function TranslationField(props) {
   const [translatedWord, setTranslatedWord] = useState("wait for it")
+
+  const {addTranslation} = useAddTranslation()
+
+  const onTranslationFunc = async(e) => {
+    e.preventDefault()
+    addTranslation({word: 'on fire', meaning: 'w ogniu'})
+  }
 
   const saveTransletedWord = () => {
       console.log({'word': props.wordToTranslate, 'meaning': translatedWord})
@@ -57,7 +65,8 @@ export default function TranslationField(props) {
               <p className="selected-word">Chosen word: <span className="the-word">"{props.wordToTranslate}"</span></p> 
               <p className="meaning-word">Meaning: <span className="the-word">"{translatedWord}"</span></p>       
               <div className="btn-wrapper">
-                <div className="i-know" onClick={saveTransletedWord}>Got it</div>
+                {/* <div className="i-know" onClick={saveTransletedWord}>Got it</div> */}
+                <div className="i-know" onClick={onTranslationFunc}>Got it</div>
                 <div className="i-dont-know" onClick={props.handleToogleVisible}>not yet</div>
               </div>
             </div>
