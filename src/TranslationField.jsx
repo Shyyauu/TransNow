@@ -9,17 +9,17 @@ export default function TranslationField(props) {
 
   const {addTranslation} = useAddTranslation()
 
-  const onTranslationFunc = async(e) => {
+  const saveTransletedWord = async(e) => {
     e.preventDefault()
-    addTranslation({word: 'on fire', meaning: 'w ogniu'})
+    addTranslation({word: props.wordToTranslate, meaning: translatedWord})
+    props.handleToogleVisible(props.visible)
   }
 
-  const saveTransletedWord = () => {
-      console.log({'word': props.wordToTranslate, 'meaning': translatedWord})
-      const savedWordObject = [{'word': props.wordToTranslate, 'meaning': translatedWord}]
-      props.saveWord(savedWordObject)
-      props.handleToogleVisible(props.visible)
-    };
+  // const saveTransletedWord = () => {
+  //     console.log({'word': props.wordToTranslate, 'meaning': translatedWord})
+  //     const savedWordObject = [{'word': props.wordToTranslate, 'meaning': translatedWord}]
+  //     props.saveWord(savedWordObject)
+  //   };
 
   async function RapidApi() {
     const options = {
@@ -66,7 +66,7 @@ export default function TranslationField(props) {
               <p className="meaning-word">Meaning: <span className="the-word">"{translatedWord}"</span></p>       
               <div className="btn-wrapper">
                 {/* <div className="i-know" onClick={saveTransletedWord}>Got it</div> */}
-                <div className="i-know" onClick={onTranslationFunc}>Got it</div>
+                <div className="i-know" onClick={saveTransletedWord}>Got it</div>
                 <div className="i-dont-know" onClick={props.handleToogleVisible}>not yet</div>
               </div>
             </div>

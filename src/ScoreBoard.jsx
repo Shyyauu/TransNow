@@ -1,13 +1,15 @@
 import { useState } from "react";
 import "./ScoreBoard.css";
-
+import { useGetTranslation } from "./useGetTranslation";
 
 export default function ScoreBoard(props) {
     
     const [isVisible, setVisible] = useState(false)
     const savedWord = props.savedWord
 
-    console.log('visible', ', objekt przeszedł do scoreboard: ', savedWord)
+    const { translations } = useGetTranslation()
+
+    console.log('visible', ', objekt przeszedł do scoreboard: ', translations)
     
     function toggleVisible() {
         setVisible(prevState => !prevState)
@@ -19,7 +21,7 @@ export default function ScoreBoard(props) {
                 {isVisible ? (
                     <div className="score-board">
                         <h3>notebook</h3>
-                    {savedWord.map((savedWord, i) => {
+                    {translations.map((savedWord, i) => {
                         return (
                             <p className="saved-word" key={i}>
                                 <span>{savedWord.word} - {savedWord.meaning}</span>
