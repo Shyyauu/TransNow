@@ -12,11 +12,12 @@
 
 .translated-sentence {
   margin: 10px 0;
+  padding-bottom: 10px;
 }
 
 .selected-word {
   margin: 0;
-  color: red;
+  color: goldenrod;
 }
 
 .the-word {
@@ -32,14 +33,13 @@
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.300);
-  overflow: hidden;
 }
 
 .btn-wrapper {
@@ -72,4 +72,25 @@
   background-color: tomato;
   color: crimson;
   border-bottom-right-radius: 10px;
+}
+
+.chosen-word:hover {
+  color: limegreen;
+  cursor: pointer;
+}
+
+.black {
+  color: black;
+}
+
+.word-cloud {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: -350px;
+  right: -100px;
+  width: 500px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: white;
 }

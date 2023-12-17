@@ -1,9 +1,15 @@
-import {useState} from "react";
-import {nanoid} from "nanoid";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { nanoid } from "nanoid";
+import { signOut } from "firebase/auth"
+import { auth } from "./firebase"
+import { useNavigate } from "react-router-dom";
 
 import TranslationField from "./TranslationField";
+import StoryList from "./StoryList";
 import "./Story.css";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Story({language, saveWord}) {
@@ -16,7 +22,7 @@ export default function Story({language, saveWord}) {
 
   const [wordToTranslate, setWordToTranslate] = useState("");
   const [visible, setVisible] = useState(false)
-  const splitingChar = " "
+  const splitingChar = "."
 
   const handleToogleVisible = () => {
     setVisible(false)
@@ -28,12 +34,23 @@ export default function Story({language, saveWord}) {
       .then((data) => setStoriesData(data))
   }
 
-  const translateField = (event) => {
-    event.preventDefault()
+  const translateField = (e) => {
+    e.preventDefault()
     setVisible((prevState) => !prevState)
-    const wordValue = event.target.getAttribute("value")
+    const wordValue = e.target.getAttribute("value")
     console.log(wordValue)
     setWordToTranslate(wordValue.toLowerCase())
+  }
+
+  const navigate = useNavigate()
+  const singUserOut = async() => {
+    try {
+      await signOut(auth)
+      localStorage.clear()
+      navigate('/')
+    } catch(err) {
+      console.error(err)
+    }
   }
 
   const regex = /[,.'"!?—]/g
@@ -42,11 +59,13 @@ export default function Story({language, saveWord}) {
 
   return (
     <>
-      <Link to="/">Settings</Link>
+    <div className="story-site">
+      <FontAwesomeIcon className="profil" onClick={singUserOut} icon={faArrowLeft} />
+      <StoryList />
       {/* <pre>{JSON.stringify(storiesData, null, 2)}</pre> */}
       {/* <h1>{storiesData.length}</h1> */}
       <h1>{storiesData.title}</h1>
-      <p>{storiesData.author}</p>
+      <p className="italic">{storiesData.author}</p>
       {/* <div>{storiesData.story}</div> */}
       <p className="story-area">
         {sentence.map((sentence) => {
@@ -54,7 +73,7 @@ export default function Story({language, saveWord}) {
             <span
               className="story"
               key={nanoid()}
-              value={sentence.toString().replace(regex, '')}
+              value={sentence.replace(regex, '')}
               onClick={translateField}
             >
               {sentence + splitingChar}
@@ -62,7 +81,7 @@ export default function Story({language, saveWord}) {
           )
         })}
       </p>
-      <p>{storiesData.moral}</p>
+      <p className="italic">{storiesData.moral}</p>
 
       <button className="story-btn nextstory" onClick={fetchData}>
         {" "}
@@ -78,6 +97,7 @@ export default function Story({language, saveWord}) {
           handleToogleVisible={handleToogleVisible}
         />
       ) : null}
+      </div>
     </>
   )
 }

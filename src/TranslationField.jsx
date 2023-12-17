@@ -1,33 +1,49 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { nanoid } from "nanoid";
 import "./TranslationField.css";
 import { useAddTranslation } from "./useAddTranslation";
 
 
 export default function TranslationField(props) {
   const [translatedWord, setTranslatedWord] = useState("wait for it")
+  const [chosenWord, setChosenWord] = useState([])
+  const [saveChosenWord, setSaveChosenWord] = useState('')
+  const [saveTranslatedWord, setSaveTranslatedWord] = useState('')
+  const [isClicked, setIsClicked] = useState(true)
+  const { addTranslation } = useAddTranslation()
+  const splitingChar = ' '
 
-  const {addTranslation} = useAddTranslation()
+  const handleClick = () => {
+    setSaveChosenWord('')
+    setSaveTranslatedWord('')
+    setIsClicked(props.handleToogleVisible)
+  }
 
   const saveTransletedWord = async(e) => {
     e.preventDefault()
-    addTranslation({word: props.wordToTranslate, meaning: translatedWord})
-    props.handleToogleVisible(props.visible)
+    if(saveChosenWord !== '') {
+      addTranslation({word: saveChosenWord, meaning: saveTranslatedWord.toLowerCase().replace(/[,.'"!?—]/g, '')})
+      props.handleToogleVisible(props.visible)
+    } else {
+      alert("choose the word to translate in 'chosen sentence' section :)")
+    }
+    
   }
 
-  // const saveTransletedWord = () => {
-  //     console.log({'word': props.wordToTranslate, 'meaning': translatedWord})
-  //     const savedWordObject = [{'word': props.wordToTranslate, 'meaning': translatedWord}]
-  //     props.saveWord(savedWordObject)
-  //   };
+  const chooseTheWord = (e) => {
+    e.preventDefault()
+    const wordValue = e.target.getAttribute("value")
+    setSaveChosenWord(wordValue)
+  }
 
-  async function RapidApi() {
+  async function RapidApi(translate, setter) {
     const options = {
       method: "GET",
       url: "https://translated-mymemory---translation-memory.p.rapidapi.com/get",
       params: {
         langpair: `en|${props.language}`,
-        q: props.wordToTranslate,
+        q: translate,
         mt: "1",
         onlyprivate: "0",
         de: "a@b.c",
@@ -42,18 +58,27 @@ export default function TranslationField(props) {
     try {
       const response = await axios.request(options)
       console.log(response.data.responseData.translatedText)
-      setTranslatedWord(response.data.responseData.translatedText)
+      setter(response.data.responseData.translatedText)
     } catch (error) {
       console.error(error)
     }
   }
 
+  useEffect(
+    function () {
+      RapidApi(props.wordToTranslate, setTranslatedWord)
+      setChosenWord(props.wordToTranslate.split(splitingChar))
+    },
+    [props.wordToTranslate]
+  );
 
   useEffect(
     function () {
-      RapidApi()
+      if(saveChosenWord !== '') {
+        RapidApi(saveChosenWord, setSaveTranslatedWord)
+      }
     },
-    [props.wordToTranslate]
+    [saveChosenWord]
   );
 
   return (
@@ -62,12 +87,36 @@ export default function TranslationField(props) {
         <div className="background">
           <div className="translation">
             <div className="translated-sentence">
-              <p className="selected-word">Chosen word: <span className="the-word">"{props.wordToTranslate}"</span></p> 
-              <p className="meaning-word">Meaning: <span className="the-word">"{translatedWord}"</span></p>       
+              <p className="selected-word">Chosen sentence:</p> 
+                <div className="selected-word black">
+                {
+                chosenWord.map(words => {
+                return (
+                  <span className='chosen-word' 
+                    value={words} 
+                    key={nanoid()}
+                    onClick={chooseTheWord}> 
+                    {words + splitingChar}
+                  </span>
+                )
+              })}
+              </div> 
+              <p className="meaning-word">Meaning: <span className="the-word">{translatedWord.toLowerCase()}</span></p>       
               <div className="btn-wrapper">
-                {/* <div className="i-know" onClick={saveTransletedWord}>Got it</div> */}
-                <div className="i-know" onClick={saveTransletedWord}>Got it</div>
-                <div className="i-dont-know" onClick={props.handleToogleVisible}>not yet</div>
+                <div className="i-know" onClick={saveTransletedWord}>
+                  {saveChosenWord ? 'got it' : 'choose'}
+                </div>
+                <div className="i-dont-know" onClick={handleClick}>not yet</div>
+                {
+                  saveChosenWord !== '' ? 
+                  <div className="word-cloud">
+                    <p>Write in a notebook? Your word: </p>
+                    <span>{saveChosenWord}</span>
+                    <span> - {saveTranslatedWord ? saveTranslatedWord : 'wait..'}</span>
+                  </div> 
+                  : null
+                }
+              
               </div>
             </div>
           </div>

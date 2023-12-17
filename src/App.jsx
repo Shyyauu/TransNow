@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react'
+import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 
@@ -9,25 +9,19 @@ import ScoreBoard from './ScoreBoard'
 
 export default function App() {
   const [language, setLanguage] = useState('pl')
-
-    const [translatedWordToScoreboard, setTranslatedWordToScoreboard] = useState(
-      [
-        {
-          word: 'pussy',
-          meaning: 'kotek'
-        }
-      ])     
   
  
   return (
-      <Routes>
+    <>
+    <Routes>
         <Route path='/' element={<MainSettings onLanguage={setLanguage}/>} />
         <Route path='/story' element={
           <>
-            <Story language={language} saveWord={setTranslatedWordToScoreboard}/>
-            <ScoreBoard savedWord={translatedWordToScoreboard}/>
+            <Story language={language}/>
+            <ScoreBoard />
           </>
         }/>
       </Routes>
+      </>
   )
 }

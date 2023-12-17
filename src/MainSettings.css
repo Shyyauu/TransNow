@@ -1,3 +1,7 @@
+.mainsettings-site {
+  padding: 20px 10px;
+}
+
 .lets-start-btn {
 background-color: #3DD1E7;
 border: 0 solid #E5E7EB;
@@ -30,6 +34,42 @@ a {
   margin: 10px;
   font-size: 18px;
 }
+
+.google { 
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  background-image: url("../img/google_logo.png") ;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.google:hover {
+  box-shadow: 0 0 10px 0 white;
+}
+
+.lets-start-btn:before {
+  content: '';
+  position: absolute;
+  border: 1px solid #E5E7EB;
+  bottom: 6px;
+  left: 6px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  transform: rotate(2deg);
+  transition: .2s;
+}
+
+.lets-start-btn:hover:before {
+  bottom: 5px;
+  left: 5px;
+}
+
 
 @media (min-width: 768px) {
   .lets-start-btn {

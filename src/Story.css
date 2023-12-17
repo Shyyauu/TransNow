@@ -1,5 +1,15 @@
+.story-site {
+  background-color: #222121;
+  padding: 10px;
+
+}
+
 .story-area {
   margin: 10px;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .story:hover {
@@ -58,6 +68,18 @@
   background-color: #3DD1E7;
   border: 0 solid #E5E7EB;
   color: #000000;
+}
+
+.profil {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.profil:hover {
+  color: #3DD1E7;
+  transition: .3s;
 }
 
 @media (min-width: 768px) {

@@ -1,7 +1,31 @@
-import {Link} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import "./MainSettings.css";
+import { auth, provider } from "./firebase"
+import { signInWithPopup } from "firebase/auth"
+
 
 export default function MainSettings({onLanguage}) {
+
+  const navigate = useNavigate()
+  
+  const singInWithGoogle = async() => {
+    const results = await signInWithPopup(auth, provider)
+    const authInfo = {
+      userID: results.user.uid,
+      name: results.user.displayName,
+      isAuth: true
+    }
+    localStorage.setItem("auth", JSON.stringify(authInfo))
+  }
+
+  const toStory = () => {
+    if(localStorage.getItem("auth") !== null) {
+      navigate('/story')
+    } else {
+      alert("Login with google :)")
+    }
+  }
+
   const handleLanguage = (event) => {
     event.preventDefault();
     const selectedLanguage = event.target.value;
@@ -19,8 +43,10 @@ export default function MainSettings({onLanguage}) {
 
   return (
     <>
+      <div className="mainsettings-site">
         <h2>Main Settings</h2>
           <div className="select-bar-wrapper">
+            <button className="google" onClick={singInWithGoogle}></button>
             <h3>Select language you want to learn.</h3>
             <select className="select-bar" onClick={handleLanguage}>
               {options.map(option => (
@@ -33,7 +59,8 @@ export default function MainSettings({onLanguage}) {
               ))} 
             </select>
           </div>
-        <button className="lets-start-btn"><Link to="/story" >Let's start!</Link></button>
+          <button className="lets-start-btn" onClick={toStory}>Let's start!</button> 
+     </div>         
     </>
   );
 }
