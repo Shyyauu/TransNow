@@ -85,12 +85,13 @@
 
 .word-cloud {
   position: absolute;
-  margin: 0;
-  padding: 0;
-  top: -350px;
-  right: -100px;
-  width: 500px;
-  height: 70px;
+  margin: 5px;
+  padding: 5px;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 150%);
+  min-width: 200px;
+  min-height: 10px;
   border-radius: 10px;
   background-color: white;
 }

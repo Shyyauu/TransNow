@@ -5,7 +5,8 @@
 }
 
 .story-area {
-  margin: 10px;
+  margin: 20px 10px;
+  overflow: hidden;
 }
 
 .italic {
@@ -13,11 +14,10 @@
 }
 
 .story:hover {
-    color: #3DD1E7;
-    visibility: visible;
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.2s;
+  color: #3DD1E7;
+  font-size: 16.5px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .story-btn {

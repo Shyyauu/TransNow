@@ -4,7 +4,7 @@ import { useGetTranslation } from "./useGetTranslation";
 import { useDeleteTranslation } from "./useDeleteTranslation";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBook, faX } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faBookOpen, faX } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -23,7 +23,6 @@ export default function ScoreBoard() {
         deleteTranslation(idToDelete)
     }
 
-
     const handleStrike = () => {
         setStrikethrough('line-through')
         setOpacity('0.5')
@@ -35,9 +34,6 @@ export default function ScoreBoard() {
         setOpacity('1')
     }
 
-
-    console.log("scoreboard", translations)
-
     function toggleVisible() {
         setVisible(prevState => !prevState)
     }
@@ -45,7 +41,7 @@ export default function ScoreBoard() {
 
     return (
         <>
-            <FontAwesomeIcon icon={faBook} className="score-board-click" onClick={toggleVisible}/>
+            <FontAwesomeIcon icon={isVisible ? faBookOpen : faBook} className="score-board-click" onClick={toggleVisible}/>
                 {isVisible ? (
                     <div className="score-board">
                         <h3>notebook</h3>

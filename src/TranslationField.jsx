@@ -28,7 +28,7 @@ export default function TranslationField(props) {
     } else {
       alert("choose the word to translate in 'chosen sentence' section :)")
     }
-    
+    setSaveChosenWord('')
   }
 
   const chooseTheWord = (e) => {
@@ -57,7 +57,6 @@ export default function TranslationField(props) {
 
     try {
       const response = await axios.request(options)
-      console.log(response.data.responseData.translatedText)
       setter(response.data.responseData.translatedText)
     } catch (error) {
       console.error(error)
@@ -110,7 +109,6 @@ export default function TranslationField(props) {
                 {
                   saveChosenWord !== '' ? 
                   <div className="word-cloud">
-                    <p>Write in a notebook? Your word: </p>
                     <span>{saveChosenWord}</span>
                     <span> - {saveTranslatedWord ? saveTranslatedWord : 'wait..'}</span>
                   </div> 

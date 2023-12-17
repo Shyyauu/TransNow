@@ -2,17 +2,20 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { db } from "./firebase"
 import { useGetUserInfo } from "./useGetUserInfo"
 
-export const useAddTranslation = () => {
-    const translationCollectionRef = collection(db, 'translations')
-    const { userID } = useGetUserInfo()
 
-    const addTranslation = async ({ word, meaning}) => {
-        await addDoc(translationCollectionRef, {
+export const useAddStory = () => {
+    const { userID } = useGetUserInfo()
+    const storyCollectionRef = collection(db, 'storylist')
+
+    const addStory = async ({ storytitle, author, story, moral }) => {
+        await addDoc(storyCollectionRef, {
             userID,
-            word,
-            meaning,
+            storytitle,
+            author,
+            story,
+            moral,   
             createdAt: serverTimestamp()
         })
     }
-    return { addTranslation }
+    return { addStory }
 }

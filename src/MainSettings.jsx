@@ -29,7 +29,6 @@ export default function MainSettings({onLanguage}) {
   const handleLanguage = (event) => {
     event.preventDefault();
     const selectedLanguage = event.target.value;
-    console.log(selectedLanguage)
     onLanguage(selectedLanguage)
   }
 
