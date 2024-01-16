@@ -1,3 +1,3 @@
 # TransNow
 
-An app for learning languages through reading. Record your progress and favorite stories.
+Application for learning languages through reading. Learn more vocabulary by reading short stories with a moral.
