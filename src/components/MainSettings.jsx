@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import "./MainSettings.css";
-import { auth, provider } from "./firebase"
+import { auth, provider } from "../hooks/firebase"
 import { signInWithPopup } from "firebase/auth"
 
 
@@ -42,6 +42,7 @@ export default function MainSettings({onLanguage}) {
 
   return (
     <>
+    <h1 className="transnow">TransNow</h1>
       <div className="mainsettings-site">
         <h2>Main Settings</h2>
           <div className="select-bar-wrapper">

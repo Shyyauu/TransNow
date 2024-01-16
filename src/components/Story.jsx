@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { signOut } from "firebase/auth"
-import { auth } from "./firebase"
+import { auth } from "../hooks/firebase"
 import { useNavigate } from "react-router-dom";
-import { useAddStory } from "./useAddStory"
+import { useAddStory } from "../hooks/useAddStory"
 
 import TranslationField from "./TranslationField";
 import StoryList from "./StoryList";

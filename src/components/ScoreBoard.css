@@ -9,7 +9,13 @@
     border: 2px solid #E5E7EB;
     border-radius: 2px;
     background-color: #333;
-    overflow-y: scroll
+    overflow-y: scroll;
+    transition: height 0.3s;
+}
+
+.full-view {
+    height: 100%;
+    transition: height 0.5s;
 }
 
 *::-webkit-scrollbar {
@@ -56,4 +62,11 @@
 .strike {
     text-decoration: line-through;
     transition: 0.3s;
+}
+
+.pdf-icon {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
 }

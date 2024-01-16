@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import "./TranslationField.css";
-import { useAddTranslation } from "./useAddTranslation";
+import { useAddTranslation } from "../hooks/useAddTranslation";
 
 
 export default function TranslationField(props) {
@@ -23,7 +23,7 @@ export default function TranslationField(props) {
   const saveTransletedWord = async(e) => {
     e.preventDefault()
     if(saveChosenWord !== '') {
-      addTranslation({word: saveChosenWord, meaning: saveTranslatedWord.toLowerCase().replace(/[,.'"!?—]/g, '')})
+      addTranslation({word: saveChosenWord.toLowerCase().replace(/[,.'"!?—;:]/g, ''), meaning: saveTranslatedWord.toLowerCase().replace(/[,.'"!?—;:]/g, '')})
       props.handleToogleVisible(props.visible)
     } else {
       alert("choose the word to translate in 'chosen sentence' section :)")

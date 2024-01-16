@@ -2,17 +2,25 @@ import { useState } from "react";
 import "./StoryList.css";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faBarsStaggered, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBarsStaggered, faPlus, faX } from '@fortawesome/free-solid-svg-icons'
 
-import { useGetStory } from "./useGetStory";
+import { useGetStory } from "../hooks/useGetStory";
+import { useDeleteStory } from "../hooks/useDeleteStory";
 
 export default function StoryList(props) {
     
     const [isVisible, setVisible] = useState(false)
+    const [ idToDelete, setIdToDelete ] = useState('')
+
     const { storylist } = useGetStory()
+    const { deleteStory } = useDeleteStory(idToDelete ? idToDelete : null)
 
     function toggleVisible() {
         setVisible(prevState => !prevState)
+    }
+
+    const handleId = () => {
+        deleteStory(idToDelete)
     }
 
     const saveStoryToFirebase = (e) => {
@@ -30,16 +38,20 @@ export default function StoryList(props) {
                             <span>Add current story to list</span>
                             <FontAwesomeIcon icon={faPlus} className="plus" onClick={saveStoryToFirebase}/>
                         </div>
+                        <div className="line"></div>
                     {storylist.map((storylist, i) => {
                         return (
-                            <div className="story-title" key={i} onClick={() => props.selectedStory({
+                            <div className="story-title" key={i} onMouseEnter={() => setIdToDelete(storylist.id)} onClick={() => props.selectedStory({
                                 _id: storylist._id,
                                 title: storylist.storytitle,
                                 author: storylist.author,
                                 story: storylist.story,
                                 moral: storylist.moral
-                            })}>
+                            })} 
+                            >
+
                                 <span>{storylist.storytitle}</span>
+                                <FontAwesomeIcon icon={faX} className="delete-story" onClick={handleId}/>
                             </div>
                         )
                     })}

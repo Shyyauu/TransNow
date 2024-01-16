@@ -21,6 +21,15 @@ a {
   color: #000000;
 }
 
+.transnow {
+  position: absolute;
+  padding: 1px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -400%);
+  background-color: #242424;
+}
+
 .select-bar-wrapper {
   flex-direction: column;
   height: 200px;
