@@ -82,11 +82,8 @@ export default function Story({language, saveWord}) {
       selectedStory={setStoriesData}
       addStoryToFirebase={setWantToSaveStory}
       />
-      {/* <pre>{JSON.stringify(storiesData, null, 2)}</pre> */}
-      {/* <h1>{storiesData.length}</h1> */}
       <h1>{storiesData.title}</h1>
       <p className="italic">{storiesData.author}</p>
-      {/* <div>{storiesData.story}</div> */}
       <p className="story-area">
         {sentence.map((sentence) => {
           return (
